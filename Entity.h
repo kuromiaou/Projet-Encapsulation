@@ -8,5 +8,10 @@ using namespace sf;
 
 class Entity
 {
+private:
+		
+public:
+	virtual void update(float deltaTime) = 0;
+	virtual void draw(RenderWindow & window) = 0;
 };
 

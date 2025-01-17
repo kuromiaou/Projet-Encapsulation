@@ -133,11 +133,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChaserEnemy.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="PatrollingEnemy.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projet Encapsulation 1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChaserEnemy.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Manager.h" />
+    <ClInclude Include="PatrollingEnemy.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

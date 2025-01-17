@@ -1,0 +1,23 @@
+#include "Player.h"
+
+Player::Player(Vector2i _POS, float _SPEED) : pos(_POS), speed(_SPEED) { setPos(_POS); rect.setFillColor(Color::Red);
+rect.setSize({ 10,10 }); rect.setPosition(10, 10); };
+void Player::update(float d) {};
+
+void Player::draw(RenderWindow& window) {
+	window.draw(rect);
+	cout << rect.getPosition().x << " " << rect.getPosition().y<<endl;
+}
+void Player::userInput() {
+	if (Keyboard::isKeyPressed(Keyboard::delocalize(Keyboard::Z))) { rect.move(0, -1 * speed); cout << "Up!"; if (rect.getPosition().y <= 0) rect.setPosition(rect.getPosition().x, 0);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::delocalize(Keyboard::Q))) { rect.move(-1 * speed, 0); cout << "Down!"; if (rect.getPosition().x <= 0) rect.setPosition(0, rect.getPosition().y);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::delocalize(Keyboard::S))) { rect.move(0, 1 * speed); cout << "Left!"; if (rect.getPosition().y >= 720 - rect.getGlobalBounds().width) rect.setPosition(rect.getPosition().x, 720 - rect.getGlobalBounds().width);
+	}
+	if (Keyboard::isKeyPressed(Keyboard::delocalize(Keyboard::D))) { rect.move(1 * speed, 0); cout << "Right!"; if (rect.getPosition().x >= 1280 - rect.getGlobalBounds().height) rect.setPosition(1280 - rect.getGlobalBounds().height, rect.getPosition().y);
+	}
+}
+void Player::setPos(Vector2i pos) { sprite.setPosition(pos.x, pos.y); }
+void Player::setSpeed(float s) { speed = s; }
+float Player::getSpeed() { return speed; }
