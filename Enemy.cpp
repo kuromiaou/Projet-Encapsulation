@@ -10,8 +10,17 @@ float Enemy::getSpeed() { return speed; }
 Vector2i Enemy::getPos() { return pos; }
 void Enemy::setBehaviour(Vector2f f) { behaviour = f; }
 void Enemy::reverseBehaviour() { behaviour = -behaviour; }
-void Enemy::randomizeBehviour() { srand(time(0)); float x, y; switch (rand() % 1) { case 0: x = -1; break; case 1: x = 1; break; }; srand(time(0) + 13); switch (rand() % 1) { case 0: y = -1; break; case 1: y = 1; break; }; behaviour = Vector2f{x , y}; }
+void Enemy::randomizeBehviour()  {srand(time(0));
+float x, y;
+x = (rand() % 2 == 0) ? -1 : 1;
+y = (rand() % 2 == 0) ? -1 : 1;
+behaviour = Vector2f{ x, y };
+}
 Vector2f Enemy::getBehaviour() { return behaviour; }
 void Enemy::move() { rect.move(getBehaviour() * getSpeed()); tiles++;}
 void Enemy::setTiles(int i) { tiles = i; }
 int Enemy::getTiles() { return tiles; }
+bool Enemy::isColliding(Player other) {
+        if (rect.getGlobalBounds().intersects(other.rect.getGlobalBounds())) return true;
+        else return false;
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "Player.h"
 class Enemy :
     public Entity
 {
@@ -24,6 +25,8 @@ public:
     void setTiles(int i);
     int getTiles();
     void move();
+
+    bool isColliding(Player other);
     
 };
 

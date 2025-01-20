@@ -39,14 +39,20 @@ int main()
         window.clear();
         player->userInput();
         player->draw(window);
-        enemy1->draw(window);
+
         enemy2->draw(window);
+        enemy2->chasePlayer(player);
+        enemy2->move();
+
+        enemy1->draw(window);
         enemy1->move();
-        enemy2->chasePlayer(*player);
-        //enemy2->move();
+
         cout <<endl <<"eee" << enemy2->getBehaviour().x << enemy2->getBehaviour().y<<endl;
         if (enemy1->getTiles() > 100) { enemy1->reverseBehaviour(); enemy1->setTiles(0); }
         cout << endl << enemy1->getTiles() << endl;
+
+        if (enemy2->isColliding(*player)) { /*window.close();*/ }
+
         window.display();
     }
     delete manager;
