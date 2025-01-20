@@ -9,6 +9,5 @@ private:
 public:
     void update(float deltaTime) override;
     PatrollingEnemy(Vector2i _POS, float _SPEED, Vector2f _BEHAVIOUR);
-    void move(Vector2f);
 };
 

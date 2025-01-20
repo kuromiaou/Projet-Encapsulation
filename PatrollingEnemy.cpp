@@ -13,4 +13,3 @@ void PatrollingEnemy::update(float deltaTime) {
 	if (uhu == 2) Enemy::randomizeBehviour();
 		
 	}
-void PatrollingEnemy::move(Vector2f beha) { rect.move(beha*getSpeed()); }

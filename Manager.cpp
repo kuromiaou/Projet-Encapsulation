@@ -11,7 +11,7 @@ Enemy* Manager::createEnemy(Vector2i pos) {
 	return enemy;
 }
 PatrollingEnemy* Manager::createPatrollingEnemy(Vector2i pos) {
-	PatrollingEnemy* enemy = new PatrollingEnemy(pos, 10, { 1,0 });
+	PatrollingEnemy* enemy = new PatrollingEnemy(pos, 1, { 1,0 });
 	allPatEnemies.push_back(enemy);
 	return enemy;
 }

@@ -7,6 +7,7 @@ private:
     Vector2i pos;
     Vector2f behaviour;
     float speed;
+    int tiles=0;
 public:
     RectangleShape rect;
     Enemy(Vector2i _POS, float _SPEED, Vector2f _BEHAVIOUR);
@@ -19,6 +20,9 @@ public:
     void reverseBehaviour();
     void randomizeBehviour();
     Vector2f getBehaviour();
+    void setTiles(int i);
+    int getTiles();
+    void move();
     
 };
 
