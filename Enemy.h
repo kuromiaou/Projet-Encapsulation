@@ -15,7 +15,7 @@ public:
     void setPos(Vector2i pos);
     void setSpeed(float speed);
     float getSpeed();
-    void setBehaviour(Vector2i v);
+    void setBehaviour(Vector2f v);
     void reverseBehaviour();
     void randomizeBehviour();
     Vector2f getBehaviour();
