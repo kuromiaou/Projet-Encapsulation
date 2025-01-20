@@ -13,5 +13,12 @@ Enemy* Manager::createEnemy(Vector2i pos) {
 PatrollingEnemy* Manager::createPatrollingEnemy(Vector2i pos) {
 	PatrollingEnemy* enemy = new PatrollingEnemy(pos, 1, { 1,0 });
 	allPatEnemies.push_back(enemy);
+	cout << "PatrollingEnemy created succefully.";
+	return enemy;
+}
+ChaserEnemy* Manager::createChaserEnemy(Vector2i pos) {
+	ChaserEnemy* enemy = new ChaserEnemy(pos, 1, { 0,1 });
+	allChaEnemies.push_back(enemy);
+	cout << "ChaserEnemy created succefully.";
 	return enemy;
 }

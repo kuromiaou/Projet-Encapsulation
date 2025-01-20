@@ -17,4 +17,5 @@ public:
     void setPos(Vector2i pos);
     void setSpeed(float speed);
     float getSpeed();
+    Vector2i getPos();
 };
