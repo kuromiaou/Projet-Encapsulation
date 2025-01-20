@@ -15,6 +15,8 @@ public:
     Player(Vector2i _POS, float _SPEED);
     void userInput();
     void setPos(Vector2i pos);
+    void increaseSpeed(int i = 1);
+    void decreaseSpeed(int i = 1);
     void setSpeed(float speed);
     float getSpeed();
     Vector2i getPos();

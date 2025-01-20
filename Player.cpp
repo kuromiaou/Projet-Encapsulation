@@ -20,5 +20,7 @@ void Player::userInput() {
 }
 void Player::setPos(Vector2i pos) { sprite.setPosition(pos.x, pos.y); }
 void Player::setSpeed(float s) { speed = s; }
+void Player::increaseSpeed(int i) { speed += i; }
+void Player::decreaseSpeed(int i) { speed -= i; }
 float Player::getSpeed() { return speed; }
 Vector2i Player::getPos() { return pos; }

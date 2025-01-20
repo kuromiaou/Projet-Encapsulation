@@ -11,15 +11,19 @@ void ChaserEnemy::chasePlayer(Player* player) {
         Vector2f newBehaviour(0, 0);
 
         if (getPos().x < playerX)
-            newBehaviour.x = 1;
+            //newBehaviour.x = 1;
+            rect.move(getSpeed(), 0);
         else if (getPos().x > playerX)
-            newBehaviour.x = -1;
+            //newBehaviour.x = -1;
+            rect.move(-getSpeed(), 0);
 
         if (getPos().y < playerY)
-            newBehaviour.y = 1;
+            //newBehaviour.y = 1;
+            rect.move(0, getSpeed());
+
         else if (getPos().y > playerY)
-            newBehaviour.y = -1;
-        
+            //newBehaviour.y = -1;
+            rect.move(0, -getSpeed());
         setBehaviour(newBehaviour);
 }
 
