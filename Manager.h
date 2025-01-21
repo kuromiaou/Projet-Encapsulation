@@ -5,6 +5,9 @@
 #include "ChaserEnemy.h"
 #include "Potion.h"
 #include "Key.h"
+#include "Wall.h"
+#include "Floor.h"
+#include "Door.h"
 
 class Manager
 {
@@ -17,6 +20,9 @@ private:
 	vector<Entity*> allKeys;
 	vector<Entity*> allPotions;
 	vector<Entity*> allEntities;
+	vector<Entity*> allWalls;
+	vector<Entity*> allFloors;
+	vector<Entity*> allDoors;
 public:
 	Player* player;
 	static Manager* getInstance() {
@@ -34,5 +40,12 @@ public:
 	void deletePotion(Potion* other);
 	void deleteKey(Key* other);
 	//void deleteEntity();
+	Wall* createWall(Vector2i);
+	Door* createDoor(Vector2i);
+	Floor* createFloor(Vector2i);
+
+	vector<Entity*> getallWalls();
+	vector<Entity*> getallFloors();
+	vector<Entity*> getallDoors();
 };
 

@@ -14,6 +14,38 @@ int width = 1280;
 int height = 720;
 
 Texture red_potionTexture;
+void createMap(Manager* manager) {
+    ifstream file("Assets\\Map\\map.txt"); 
+    if (!file) {
+        cerr << "Unable to open file";
+    }
+    char ch;
+    int i=0, x=0, y=0;
+    while (file.get(ch)) {
+        switch (ch) {
+        case 'W' :
+            manager->createWall(Vector2i{ x,y });
+            x += 64;
+            i++;
+            break;
+        case 'D' :
+            manager->createDoor(Vector2i{ x,y });
+            x += 48;
+            i++;
+            break;
+        case 'F':
+            manager->createFloor(Vector2i{ x,y });
+            x += 48;
+            i++;
+            break;
+        }
+        
+    }
+    cout << endl;
+
+
+    file.close();
+}
 
 int main()
 {
@@ -21,9 +53,12 @@ int main()
     srand(time(0));
     Game game;
     Manager* manager = Manager::getInstance();
+
+    createMap(manager);
+
     Player* player = manager->createPlayer(Vector2i {200,200});
     PatrollingEnemy* enemy1 = manager->createPatrollingEnemy(Vector2i{ 20,20 });
-    ChaserEnemy* enemy2 = manager->createChaserEnemy(Vector2i{ 200,200 });
+    ChaserEnemy* enemy2 = manager->createChaserEnemy(Vector2i{ 500,500 });
     Potion* potion1 = manager->createPotion(Vector2i {500,500},red_potionTexture);
     RenderWindow window(VideoMode(width, height, 32), "~Project Escaping~", Style::Titlebar | Style::Close);
 
@@ -41,11 +76,15 @@ int main()
                 window.close();
         }
         window.clear();
+
+        for (int i=0; i<manager->getallWalls().size();i++)
+            
+
         player->userInput();
         player->draw(window);
 
         enemy2->draw(window);
-        enemy2->chasePlayer(player);
+        enemy2->chasePlayer(*player);
         enemy2->move();
 
         enemy1->draw(window);
@@ -74,4 +113,6 @@ int main()
     delete enemy1;
     delete enemy2;
     delete potion1;
+
+    return 727;
 }

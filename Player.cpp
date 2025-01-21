@@ -17,6 +17,7 @@ void Player::userInput() {
 	}
 	if (Keyboard::isKeyPressed(Keyboard::delocalize(Keyboard::D))) { rect.move(1 * speed, 0); cout << "Right!"; if (rect.getPosition().x >= 1280 - rect.getGlobalBounds().height) rect.setPosition(1280 - rect.getGlobalBounds().height, rect.getPosition().y);
 	}
+	pos = { (int)rect.getPosition().x, (int)rect.getPosition().y };
 }
 void Player::setPos(Vector2i pos) { sprite.setPosition(pos.x, pos.y); }
 void Player::setSpeed(float s) { speed = s; }

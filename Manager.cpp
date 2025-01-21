@@ -60,3 +60,29 @@ void Manager::deleteKey(Key* key) {
 		allObjects.erase(it);
 	}
 }
+
+Wall* Manager::createWall(Vector2i pos) {
+	Wall* obj = new Wall(pos);
+	allWalls.push_back(obj);
+	allEntities.push_back(obj);
+	cout << "Wall created successfully.";	
+	return obj;
+}
+Door* Manager::createDoor(Vector2i pos) {
+	Door* obj = new Door(pos);
+	allDoors.push_back(obj);
+	allEntities.push_back(obj);
+	cout << "Door created successfully.";
+	return obj;
+}
+Floor* Manager::createFloor(Vector2i pos) {
+	Floor* obj = new Floor(pos);
+	allFloors.push_back(obj);
+	allEntities.push_back(obj);
+	cout << "Floor created successfully.";
+	return obj;
+}
+vector<Entity*> Manager::getallWalls() { return allWalls; }
+vector<Entity*> Manager::getallFloors() { return allFloors; };
+vector<Entity*> Manager::getallDoors() { return allDoors; };
+

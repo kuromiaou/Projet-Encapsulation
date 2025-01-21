@@ -5,26 +5,45 @@ ChaserEnemy::ChaserEnemy(Vector2i _POS, float _SPEED, Vector2f _BEHAVIOUR)
 	rect.setFillColor(Color::Magenta); rect.setSize({ 15,15 }); rect.setPosition(_POS.x, _POS.y);
 }
 
-void ChaserEnemy::chasePlayer(Player* player) {
-		playerX = player->getPos().x; playerY = player->getPos().y;
+//void ChaserEnemy::chasePlayer(Player& player) {
+//		playerX = player.getPos().x; playerY = player.getPos().y;
+//
+//
+//        if (getPos().x < playerX)
+//            newBehaviour.x = 1;
+//        else if (getPos().x > playerX)
+//            newBehaviour.x = -1;
+//
+//        if (getPos().y < playerY)
+//            newBehaviour.y = 1;
+//
+//        else if (getPos().y > playerY)
+//            newBehaviour.y = -1;
+//        cout << newBehaviour.x << endl;
+//        setBehaviour(newBehaviour);
+//}
+void ChaserEnemy::chasePlayer(Player& player) {
+    float playerX = player.getPos().x;
+    float playerY = player.getPos().y;
+    float currentX = getPos().x;
+    float currentY = getPos().y;
 
-        Vector2f newBehaviour(1, 0);
+    float deltaX = playerX - currentX;
+    float deltaY = playerY - currentY;
 
-        if (getPos().x < playerX)
-            newBehaviour.x = 1;
-            //rect.move(getSpeed(), 0);
-        else if (getPos().x > playerX)
-            newBehaviour.x = -1;
-            //rect.move(-getSpeed(), 0);
+    float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        if (getPos().y < playerY)
-            newBehaviour.y = 1;
-            //rect.move(0, getSpeed());
+    if (distance != 0) {
+        deltaX /= distance;
+        deltaY /= distance;
+    }
 
-        else if (getPos().y > playerY)
-            newBehaviour.y = -1;
-            //rect.move(0, -getSpeed());
-        setBehaviour(newBehaviour);
+    float speed = 2.f; 
+
+    newBehaviour.x = deltaX * speed;
+    newBehaviour.y = deltaY * speed;
+
+    setBehaviour(newBehaviour);
 }
 
 void ChaserEnemy::update(float deltaTime) {
