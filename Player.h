@@ -7,6 +7,7 @@ private:
     Vector2i pos;
     float speed;
 public:
+    bool canLvlUp = false;
     RectangleShape rect;   
     Texture texture;
     Sprite sprite;

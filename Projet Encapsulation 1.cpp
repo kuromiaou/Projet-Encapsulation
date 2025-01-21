@@ -46,18 +46,26 @@ int main()
 
         enemy2->draw(window);
         enemy2->chasePlayer(player);
-        //enemy2->move();
+        enemy2->move();
 
         enemy1->draw(window);
         enemy1->move();
         //if (potion1 != nullptr) cout << "uzu";
-        potion1->draw(window);
+        
         cout <<endl <<"eee" << enemy2->getBehaviour().x << enemy2->getBehaviour().y<<endl;
         if (enemy1->getTiles() > 100) { enemy1->reverseBehaviour(); enemy1->setTiles(0); }
-        cout << endl << enemy1->getTiles() << endl;
-
+        //cout << endl << enemy1->getTiles() << endl;
+        cout << player->getSpeed();
         if (enemy2->isColliding(*player)) { /*window.close();*/ }
-        if (potion1->isColliding(*player)) { potion1->interact(*player); cout << "OOOO"; }
+        if (potion1->isColliding(*player)) { 
+            potion1->interact(*player); 
+            cout << "OOOO";
+            manager->deletePotion(potion1);
+            //delete potion1;
+        }
+        else if (!potion1->isObtained){
+            potion1->draw(window);
+        }
 
         window.display();
     }
@@ -65,4 +73,5 @@ int main()
     delete player;
     delete enemy1;
     delete enemy2;
+    delete potion1;
 }

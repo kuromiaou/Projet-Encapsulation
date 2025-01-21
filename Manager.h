@@ -14,8 +14,9 @@ private:
 	vector<Entity*> allPatEnemies;
 	vector<Entity*> allChaEnemies;
 	vector<Entity*> allObjects;
-	vector<Entity*> allPotions;
 	vector<Entity*> allKeys;
+	vector<Entity*> allPotions;
+	vector<Entity*> allEntities;
 public:
 	Player* player;
 	static Manager* getInstance() {
@@ -29,8 +30,9 @@ public:
 	ChaserEnemy* createChaserEnemy(Vector2i pos);
 	Potion* createPotion(Vector2i,Texture&);
 	Key* createKey(Vector2i,Texture&);
-	void deleteObject(Objects other);
-	void deletePotion(Potion other);
-	void deleteKey(Key other);
+	//void deleteObject(Objects* other);
+	void deletePotion(Potion* other);
+	void deleteKey(Key* other);
+	//void deleteEntity();
 };
 

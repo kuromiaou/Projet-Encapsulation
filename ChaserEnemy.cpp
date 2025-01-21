@@ -8,22 +8,22 @@ ChaserEnemy::ChaserEnemy(Vector2i _POS, float _SPEED, Vector2f _BEHAVIOUR)
 void ChaserEnemy::chasePlayer(Player* player) {
 		playerX = player->getPos().x; playerY = player->getPos().y;
 
-        Vector2f newBehaviour(0, 0);
+        Vector2f newBehaviour(1, 0);
 
         if (getPos().x < playerX)
-            //newBehaviour.x = 1;
-            rect.move(getSpeed(), 0);
+            newBehaviour.x = 1;
+            //rect.move(getSpeed(), 0);
         else if (getPos().x > playerX)
-            //newBehaviour.x = -1;
-            rect.move(-getSpeed(), 0);
+            newBehaviour.x = -1;
+            //rect.move(-getSpeed(), 0);
 
         if (getPos().y < playerY)
-            //newBehaviour.y = 1;
-            rect.move(0, getSpeed());
+            newBehaviour.y = 1;
+            //rect.move(0, getSpeed());
 
         else if (getPos().y > playerY)
-            //newBehaviour.y = -1;
-            rect.move(0, -getSpeed());
+            newBehaviour.y = -1;
+            //rect.move(0, -getSpeed());
         setBehaviour(newBehaviour);
 }
 
