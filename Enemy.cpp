@@ -7,7 +7,7 @@ void Enemy::update(float r) {}
 void Enemy::setPos(Vector2i posi) { pos = posi; }
 void Enemy::setSpeed(float speedy) { speed = speedy; };
 float Enemy::getSpeed() { return speed; }
-Vector2i Enemy::getPos() { return pos; }
+Vector2i Enemy::getPos() { return Vector2i{ rect.getPosition() }; }
 void Enemy::setBehaviour(Vector2f _NEWBEHAVIOUR) { behaviour = _NEWBEHAVIOUR; }
 void Enemy::reverseBehaviour() { behaviour = -behaviour; }
 void Enemy::randomizeBehviour()  {srand(time(0));

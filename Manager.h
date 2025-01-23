@@ -12,17 +12,17 @@
 class Manager
 {
 private:
-	vector<Entity*> allPlayers;
-	vector<Entity*> allEnemies;
-	vector<Entity*> allPatEnemies;
-	vector<Entity*> allChaEnemies;
-	vector<Entity*> allObjects;
-	vector<Entity*> allKeys;
-	vector<Entity*> allPotions;
+	vector<Player*> allPlayers;
+	vector<Enemy*> allEnemies;
+	vector<PatrollingEnemy*> allPatEnemies;
+	vector<ChaserEnemy*> allChaEnemies;
+	vector<Objects*> allObjects;
+	vector<Key*> allKeys;
+	vector<Potion*> allPotions;
 	vector<Entity*> allEntities;
-	vector<Entity*> allWalls;
-	vector<Entity*> allFloors;
-	vector<Entity*> allDoors;
+	vector<Wall*> allWalls;
+	vector<Floor*> allFloors;
+	vector<Door*> allDoors;                  // utiliser vector<Entity*> et pas vector<Door*> me bloque juste car je n'ai pas accès aux attributs et méthodes de Door dans le reste du manager ou dans le main.
 public:
 	Player* player;
 	static Manager* getInstance() {
@@ -44,8 +44,19 @@ public:
 	Door* createDoor(Vector2i);
 	Floor* createFloor(Vector2i);
 
-	vector<Entity*> getallWalls();
-	vector<Entity*> getallFloors();
-	vector<Entity*> getallDoors();
+	vector<Entity*> getallEntities();
+	vector<Wall*> getallWalls();
+	vector<Floor*> getallFloors();
+	vector<Door*> getallDoors();
+	vector<PatrollingEnemy*> getallPatEnemies();
+	vector<ChaserEnemy*> getallChaEnemies();
+	vector<Key*> getallKeys();
+	vector<Potion*> getallPotions();
+
+	void deletePatEnemy(PatrollingEnemy*);
+	void deleteChaEnemy(ChaserEnemy*);
+	void deleteWall(Wall*);
+	void deleteFloor(Floor*);
+	void deleteDoor(Door*);
 };
 

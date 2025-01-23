@@ -38,11 +38,11 @@ void ChaserEnemy::chasePlayer(Player& player) {
         deltaY /= distance;
     }
 
-    float speed = 2.f; 
+    float speed = 1.75f; 
 
     newBehaviour.x = deltaX * speed;
     newBehaviour.y = deltaY * speed;
-
+    //cout << "zuuzuzuz" << currentX << " " << currentY << "ezfzefzef\n";
     setBehaviour(newBehaviour);
 }
 

@@ -7,8 +7,9 @@ private:
     Vector2i pos;
     float speed;
 public:
+    int state = 0;
     bool canLvlUp = false;
-    RectangleShape rect;   
+    RectangleShape rect;
     Texture texture;
     Sprite sprite;
     void update(float d) override;

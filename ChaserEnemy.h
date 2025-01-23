@@ -6,7 +6,6 @@ class ChaserEnemy :
     public Enemy
 {
 private:
-    float playerX, playerY;
 public:
     Vector2f newBehaviour = { 0,0 };
     void update(float deltaTime) override;

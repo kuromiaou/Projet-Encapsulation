@@ -1,7 +1,7 @@
 #include "Manager.h"
 
 Player* Manager::createPlayer(Vector2i pos) {
-	Player* player = new Player(pos, 10.f);
+	Player* player = new Player(pos, 3);
 	allPlayers.push_back(player);
 	allEntities.push_back(player);
 	return player;
@@ -56,8 +56,6 @@ void Manager::deleteKey(Key* key) {
 	if (it != allKeys.end()) {
 		delete* it;
 		allKeys.erase(it);
-		allEntities.erase(it);
-		allObjects.erase(it);
 	}
 }
 
@@ -82,7 +80,57 @@ Floor* Manager::createFloor(Vector2i pos) {
 	cout << "Floor created successfully.";
 	return obj;
 }
-vector<Entity*> Manager::getallWalls() { return allWalls; }
-vector<Entity*> Manager::getallFloors() { return allFloors; };
-vector<Entity*> Manager::getallDoors() { return allDoors; };
+vector<Entity*> Manager::getallEntities() {	return allEntities;}
+
+vector<Wall*> Manager::getallWalls() { return allWalls; }
+vector<Floor*> Manager::getallFloors() { return allFloors; };
+vector<Door*> Manager::getallDoors() { return allDoors; };  
+vector<PatrollingEnemy*> Manager::getallPatEnemies() { return allPatEnemies; };  
+vector<ChaserEnemy*> Manager::getallChaEnemies() { return allChaEnemies; };  
+vector<Key*> Manager::getallKeys() { return allKeys; };  
+vector<Potion*> Manager::getallPotions() { return allPotions; };  
+
+void Manager::deletePatEnemy(PatrollingEnemy* obj){
+	auto it = find(allPatEnemies.begin(), allPatEnemies.end(), obj);
+	cout << "pot deleted\n";
+	if (it != allPatEnemies.end()) {
+		delete* it;
+		allPatEnemies.erase(it);
+	}
+}
+void Manager::deleteChaEnemy(ChaserEnemy* obj){
+	auto it = find(allChaEnemies.begin(), allChaEnemies.end(), obj);
+	cout << "pot deleted\n";
+	if (it != allChaEnemies.end()) {
+		delete* it;
+		allChaEnemies.erase(it);
+	}
+}
+void Manager::deleteWall(Wall* obj){
+	auto it = find(allWalls.begin(), allWalls.end(), obj);
+	cout << "pot deleted\n";
+	if (it != allWalls.end()) {
+		delete* it;
+		allWalls.erase(it);
+	}
+}
+void Manager::deleteFloor(Floor* obj){
+	auto it = find(allFloors.begin(), allFloors.end(), obj);
+	cout << "pot deleted\n";
+	if (it != allFloors.end()) {
+		delete* it;
+		allFloors.erase(it);
+	}
+}
+void Manager::deleteDoor(Door* obj){
+	auto it = find(allDoors.begin(), allDoors.end(), obj);
+	cout << "pot deleted\n";
+	if (it != allDoors.end()) {
+		delete* it;
+		allDoors.erase(it);
+	}
+}
+
+
+
 
