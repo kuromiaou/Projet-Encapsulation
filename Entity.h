@@ -9,8 +9,6 @@ using namespace sf;
 
 void continueAnim(Sprite*);
 
-
-
 class Entity
 {
 private:

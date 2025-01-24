@@ -7,6 +7,5 @@ private:
 public:
     Key(Vector2i,Texture);
     void interact(Player& player) override;
-
 };
 

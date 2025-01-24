@@ -18,8 +18,7 @@ public:
     void setSpeed(float speed);
     void setSpeed(int i = 1);
     void increaseSpeed(int i = 1);
-    void decreaseSpeed(int i = 1);
-    
+    void decreaseSpeed(int i = 1);    
     float getSpeed();
     Vector2i getPos();
     void setBehaviour(Vector2f);
@@ -29,8 +28,6 @@ public:
     void setTiles(int i);
     int getTiles();
     void move();
-
-    bool isColliding(Player other);
-    
+    bool isColliding(Player other);    
 };
 

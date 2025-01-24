@@ -12,7 +12,7 @@ public:
     Texture texture;
     Sprite sprite;
 
-    Objects(Vector2i,Texture &textureee);
+    Objects(Vector2i,Texture &texturee);
 
     virtual void interact(Player& player) = 0;    
     void draw(RenderWindow& window);

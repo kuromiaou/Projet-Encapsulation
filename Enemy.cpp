@@ -10,12 +10,12 @@ float Enemy::getSpeed() { return speed; }
 Vector2i Enemy::getPos() { return Vector2i{ rect.getPosition() }; }
 void Enemy::setBehaviour(Vector2f _NEWBEHAVIOUR) { behaviour = _NEWBEHAVIOUR; }
 void Enemy::reverseBehaviour() { behaviour = -behaviour; }
-void Enemy::randomizeBehviour()  {srand(time(0));
-float x, y;
-x = (rand() % 2 == 0) ? -1 : 1;
-y = (rand() % 2 == 0) ? -1 : 1;
-behaviour = Vector2f{ x, y };
-}
+void Enemy::randomizeBehviour()  {srand(time(0));// not used 
+float x, y;// not used // not used 
+x = (rand() % 2 == 0) ? -1 : 1;// not used 
+y = (rand() % 2 == 0) ? -1 : 1;// not used 
+behaviour = Vector2f{ x, y };// not used 
+} // not used 
 Vector2f Enemy::getBehaviour() { return behaviour; }
 void Enemy::setSpeed(int i) { speed = i; }
 void Enemy::increaseSpeed(int i) { speed += i; }

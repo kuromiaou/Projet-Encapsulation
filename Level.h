@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 
-#include "Game.h"
 #include "Manager.h"
 using namespace std;
 using namespace sf;
@@ -17,6 +16,7 @@ private:
 	ifstream map0, map1, map2;
 	int XXX, YYY;
 public:
+	Clock timer;
 	void end();
 	void createMap(Manager* manager, int n);
 	Level();
@@ -27,6 +27,5 @@ public:
 	void level0();
 	void level1();
 	void level2();
-	void death(Manager*);
 };
 

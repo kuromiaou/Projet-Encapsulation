@@ -36,7 +36,7 @@ startScreen::startScreen() {
     left_text.setPosition(width / 2 - 500, 400);
     interact_text.setPosition(width / 2 +200, 375);
     play_text.setPosition(width / 2 +175, 500);
-    leave_text.setPosition(width / 2+175, 600);
+    leave_text.setPosition(width / 2+175, 600); 
 }
 void startScreen::show() {
     Level* level = new Level;

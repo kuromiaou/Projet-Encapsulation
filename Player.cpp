@@ -3,6 +3,7 @@
 
 Player::Player(Vector2i _POS, float _SPEED) : pos(_POS), speed(_SPEED) { setPos(_POS); rect.setFillColor(Color::Red);
 rect.setSize({ 10,10 }); rect.setPosition(_POS.x,_POS.y); };
+
 void Player::update(float d) {};
 
 void Player::draw(RenderWindow& window) {

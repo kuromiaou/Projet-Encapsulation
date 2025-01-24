@@ -14,4 +14,3 @@ public:
 	Text start_text, bind_text,up_text,down_text,left_text,right_text,leave_text,play_text,interact_text;
 	void show();
 };
-

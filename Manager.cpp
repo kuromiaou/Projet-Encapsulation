@@ -130,7 +130,3 @@ void Manager::deleteDoor(Door* obj){
 		allDoors.erase(it);
 	}
 }
-
-
-
-

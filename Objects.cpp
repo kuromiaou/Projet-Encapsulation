@@ -6,7 +6,7 @@ void Objects::draw(RenderWindow& window) { window.draw(sprite); }
 
 Vector2i Objects::getPos() { return pos; }
 
-void Objects::update(float deltaTime) {}
+void Objects::update(float deltaTime) {};
 
 bool Objects::isColliding(Player other) {
     if (sprite.getGlobalBounds().intersects(other.rect.getGlobalBounds())) return true;

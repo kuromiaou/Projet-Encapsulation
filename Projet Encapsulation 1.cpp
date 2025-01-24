@@ -2,8 +2,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
-#include "Game.h"
 #include "Manager.h"
 #include "Level.h"
 #include "startScreen.h"

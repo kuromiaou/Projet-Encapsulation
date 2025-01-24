@@ -5,7 +5,6 @@ class Door :
     public Entity
 {
 private:
-
 public:
     bool isOpened=false;
     Texture doorTextureOpened, doorTextureClosed;

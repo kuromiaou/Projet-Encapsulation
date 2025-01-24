@@ -16,4 +16,3 @@ public:
     void draw(RenderWindow& window) override;
     bool isColliding(Player& other);
 };
-

@@ -14,4 +14,3 @@ public:
     void draw(RenderWindow& window) override;
     void update(float) override;
 };
-

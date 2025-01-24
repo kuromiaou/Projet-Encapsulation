@@ -6,8 +6,7 @@ class Player :
 {
 private:
     Vector2i pos;
-    float speed;
-    
+    float speed;    
 public:
     bool moveDATA = false;
     enum facing {

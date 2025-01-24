@@ -224,6 +224,10 @@ void Level::level0() {
                 manager->deletePotion(potionX);
             }
             else if (!potionX->isObtained) {
+                /*if (timer.getElapsedTime().asSeconds() > .25f) {
+                    continueAnim(&potionX->sprite);
+                }
+                timer.restart();*/
                 potionX->draw(window);
             }
         }

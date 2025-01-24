@@ -7,4 +7,3 @@ Floor::Floor(Vector2i _POS) {
 
 void Floor::update(float f) {};
 void Floor::draw(RenderWindow& window) { window.draw(floorSprite); }
-

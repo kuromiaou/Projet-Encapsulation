@@ -59,4 +59,3 @@ public:
 	void deleteFloor(Floor*);
 	void deleteDoor(Door*);
 };
-

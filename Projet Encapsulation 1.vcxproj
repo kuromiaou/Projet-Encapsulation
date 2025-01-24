@@ -138,7 +138,6 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Floor.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Manager.cpp" />
@@ -156,7 +155,6 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Floor.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Manager.h" />
