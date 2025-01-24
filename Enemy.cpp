@@ -17,6 +17,9 @@ y = (rand() % 2 == 0) ? -1 : 1;
 behaviour = Vector2f{ x, y };
 }
 Vector2f Enemy::getBehaviour() { return behaviour; }
+void Enemy::setSpeed(int i) { speed = i; }
+void Enemy::increaseSpeed(int i) { speed += i; }
+void Enemy::decreaseSpeed(int i) { speed -= i; }
 void Enemy::move() { rect.move(getBehaviour() * getSpeed()); tiles++;}
 void Enemy::setTiles(int i) { tiles = i; }
 int Enemy::getTiles() { return tiles; }

@@ -14,7 +14,6 @@ public:
     Wall(Vector2i);
     void update(float) override;
     void draw(RenderWindow& window) override;
-    bool isColliding(Player other);
-
+    bool isColliding(Player& other);
 };
 

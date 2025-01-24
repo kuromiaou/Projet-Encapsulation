@@ -1,11 +1,49 @@
 #include "Level.h"
 int width = 1280;
 int height = 700;
-ifstream map0, map1, map2;
-void createMap(Manager* manager, int n) {
+
+void Level::end() {
+    window.close();
+    while (true) {
+        RenderWindow videoWindow(VideoMode(1920, 1080), "Easter Egg");
+        while (videoWindow.isOpen()) {
+            Event event;
+            while (videoWindow.pollEvent(event)) {
+                if (event.type == Event::Closed)
+                    videoWindow.close();
+            }
+
+            videoWindow.clear();
+            videoWindow.draw(lose_screen);
+            videoWindow.draw(losing_text);
+            videoWindow.display();
+            if (Keyboard::isKeyPressed(Keyboard::Tab)) {
+                videoWindow.close();
+                RenderWindow window(VideoMode(width, height, 32), "~Project Escaping~", Style::Titlebar | Style::Close);
+                level0();
+            }
+
+        }
+        
+    }
+}
+Level::Level() {
     map0.open("Assets\\Map\\level0.txt");
     map1.open("Assets\\Map\\level1.txt");
     map2.open("Assets\\Map\\level2.txt");
+    red_potionTexture.loadFromFile("Assets/Entity/Objects/Potion/red_potion.png");
+    keyTexture.loadFromFile("Assets\\Entity\\Objects\\Key\\Key.png");
+    losing_font.loadFromFile("Assets/Font/pixel.ttf");
+    losing_text.setFont(losing_font);
+    losing_text.setFillColor(Color::White);
+    losing_text.setString("L.L.L\n   Press tab to restart. \n(Please don't do that it will crash ^^')");
+    losing_text.setPosition(1920 / 2, 1080 / 2);
+}
+
+
+
+void Level::createMap(Manager* manager, int n) {
+    
     char ch;
     int i = 0, x = 0, y = 0;
     switch (n) {
@@ -18,7 +56,7 @@ void createMap(Manager* manager, int n) {
             switch (ch) {
             case 'W':
                 manager->createWall(Vector2i{ x,y });
-                x += 32;
+                x += 32;  
                 i++;
                 break;
             case 'D':
@@ -114,15 +152,16 @@ void Level::level0() {
 
     Manager* manager = Manager::getInstance();
 
-    red_potionTexture.loadFromFile("Assets/Entity/Objects/Potion/red_potion.png");
-    keyTexture.loadFromFile("Assets\\Entity\\Objects\\Key\\Key.png");
+    
 
     createMap(manager, 0);
 
     Player* player = manager->createPlayer(Vector2i{ width / 2,height / 2 });
-    ChaserEnemy* e2 = manager->createChaserEnemy(Vector2i{ 1000,500 });
-    ChaserEnemy* e3 = manager->createChaserEnemy(Vector2i{ 0,500 });
-    ChaserEnemy* e4 = manager->createChaserEnemy(Vector2i{ 1000,0 });
+    ChaserEnemy* e1 = manager->createChaserEnemy(Vector2i{ 100,100 });
+    ChaserEnemy* e2 = manager->createChaserEnemy(Vector2i{ 1000,100 });
+    ChaserEnemy* e3 = manager->createChaserEnemy(Vector2i{ 100,600 });
+    ChaserEnemy* e4 = manager->createChaserEnemy(Vector2i{ 1000,600 });
+    ChaserEnemy* e5 = manager->createChaserEnemy(Vector2i{ 1000,0 });
     Potion* potion1 = manager->createPotion(Vector2i{ 700,150 }, red_potionTexture);
     Potion* potion2 = manager->createPotion(Vector2i{ 700,250 }, red_potionTexture);
     Potion* potion3 = manager->createPotion(Vector2i{ 700,300 }, red_potionTexture);
@@ -148,10 +187,13 @@ void Level::level0() {
         for (auto& floors : manager->getallFloors()) {
             floors->draw(window);
         }
-
         player->userInput();
+        
         player->draw(window);
 
+        e1->draw(window);
+        e1->chasePlayer(*player);
+        e1->move();
         e2->draw(window);
         e2->chasePlayer(*player);
         e2->move();
@@ -161,12 +203,20 @@ void Level::level0() {
         e4->draw(window);
         e4->chasePlayer(*player);
         e4->move();
+        e5->draw(window);
+        e5->chasePlayer(*player);
+        e5->move();
 
 
 
         //cout << endl << "eee" << e2->getBehaviour().x << " " << e2->getBehaviour().y << endl;
         cout << player->getSpeed();
-        if (e2->isColliding(*player)) { /*window.close();*/ }
+        for(auto& eX : manager->getallChaEnemies())
+        if (eX->isColliding(*player)) {
+            
+            end();            
+
+        }
         for (auto& potionX : manager->getallPotions()) {
             if (potionX->isColliding(*player)) {
                 potionX->interact(*player);
@@ -182,18 +232,39 @@ void Level::level0() {
             player->canLvlUp = true;
             cout << "Door Opened.";
             manager->deleteKey(key1);
+            for (auto& eX : manager->getallChaEnemies())
+                eX->setSpeed(eX->getSpeed()*1.25f);
         }
         else if (!key1->isObtained and player->state==3) {
             key1->sprite.setPosition(200, 200);
             key1->draw(window);
         }
+        /*for (auto& walls : manager->getallWalls()) {      //NO WALLS COLLISION
+            if (walls->isColliding(*player)) {
+                switch (player->facing) {
+                case 0:
+                    player->rect.setPosition({ (float)player->getPos().x,(float)player->getPos().y + 10 });
+                    break;
+                case 1:
+                    player->rect.setPosition({ (float)player->getPos().x+10,(float)player->getPos().y });
+                    break;
+                case 2:
+                    player->rect.setPosition({ (float)player->getPos().x,(float)player->getPos().y - 10 });
+                    break;
+                case 3:
+                    player->rect.setPosition({ (float)player->getPos().x - 10,(float)player->getPos().y });
+                    break;
 
+                }
+            }
+        }*/
         for (auto& doors : manager->getallDoors()) {
             if (doors->isColliding(*player)) {
                 if (player->canLvlUp and Keyboard::isKeyPressed(Keyboard::E) and !doors->isOpened) {
                     doors->doorSprite.setTexture(doors->doorTextureOpened);
                     player->canLvlUp = false;
                     doors->isOpened = true;
+
                 }
                 if (doors->isOpened) {
                     XXX = player->getPos().x;
@@ -220,10 +291,7 @@ void Level::level1() {
 
     Manager* manager = Manager::getInstance();
 
-    red_potionTexture.loadFromFile("Assets/Entity/Objects/Potion/red_potion.png");
-    keyTexture.loadFromFile("Assets\\Entity\\Objects\\Key\\Key.png");
-
-    for (auto& walls : manager->getallWalls()) {
+    /*for (auto& walls : manager->getallWalls()) {
         manager->deleteWall(walls);
     }
     for (auto& doors : manager->getallDoors()) {
@@ -231,14 +299,23 @@ void Level::level1() {
     }
     for (auto& floors : manager->getallFloors()) {
         manager->deleteFloor(floors);
-    }
+    }*/
 
-    createMap(manager, 1);
+    createMap(manager, 0);
 
 
     Player* player = manager->createPlayer({ XXX,YYY });
-    PatrollingEnemy* pe1 = manager->createPatrollingEnemy(Vector2i{ 20,20 });
-
+    PatrollingEnemy* pe1 = manager->createPatrollingEnemy(Vector2i{ 100,100 });
+    PatrollingEnemy* pe2 = manager->createPatrollingEnemy(Vector2i{ 100,200 });
+    PatrollingEnemy* pe3 = manager->createPatrollingEnemy(Vector2i{ 100,300 });
+    PatrollingEnemy* pe4 = manager->createPatrollingEnemy(Vector2i{ 100,400 });
+    PatrollingEnemy* pe5 = manager->createPatrollingEnemy(Vector2i{ 100,500 });
+    PatrollingEnemy* pe6 = manager->createPatrollingEnemy(Vector2i{ 100,600 });
+    Potion* potion1 = manager->createPotion(Vector2i{ 400,150 }, red_potionTexture);
+    Potion* potion2 = manager->createPotion(Vector2i{ 700,150 }, red_potionTexture);
+    Potion* potion3 = manager->createPotion(Vector2i{ 550,200 }, red_potionTexture);
+    Key* key1 = manager->createKey(Vector2i{ -10,-10 }, keyTexture);
+    Key* key2 = manager->createKey(Vector2i{ -10,-10 }, keyTexture);
     cout << "\nWelcome to level 1 Player.\nPlease continue to explore this dungeon if you wish to get out.\n";
 
 
@@ -254,19 +331,99 @@ void Level::level1() {
         for (auto& floors : manager->getallFloors()) {
             floors->draw(window);
         }
+        
+        /*for (auto& walls : manager->getallWalls()) {
+            if (walls->isColliding(*player)) {
+                switch (player->facing) {
+                case 0:
+                    player->rect.setPosition({ (float)player->getPos().x,(float)player->getPos().y + 5 });
+                    break;
+                case 1:
+                    player->rect.setPosition({ (float)player->getPos().x + 10,(float)player->getPos().y });
+                    break;
+                case 2:
+                    player->rect.setPosition({ (float)player->getPos().x,(float)player->getPos().y - 5 });
+                    break;
+                case 3:
+                    player->rect.setPosition({ (float)player->getPos().x - 5,(float)player->getPos().y });
+                    break;
 
-
+                }
+            }
+        }*/
         player->userInput();
         player->draw(window);
 
-
-        if (pe1->getTiles() > 100) { pe1->reverseBehaviour(); pe1->setTiles(0); }
+        for(auto& peX : manager->getallPatEnemies())
+        if (peX->getTiles() > 100) { peX->reverseBehaviour(); peX->setTiles(0); }
         //cout << endl << pe1->getTiles() << endl;
         pe1->draw(window);
-        pe1->move();
+        pe1->move(); 
+        pe2->draw(window);
+        pe2->move(); 
+        pe3->draw(window);
+        pe3->move(); 
+        pe4->draw(window);
+        pe4->move(); 
+        pe5->draw(window);
+        pe5->move();
+        pe6->draw(window);
+        pe6->move();
+        
+        for (auto& potionX : manager->getallPotions()) {
+            if (potionX->isColliding(*player)) {
+                potionX->interact(*player);
+                cout << "OOOO";
+                manager->deletePotion(potionX);
+            }
+            else if (!potionX->isObtained) {
+                potionX->draw(window);
+            }
+        }
+        for (auto& keyX : manager->getallKeys()) {
+            if (keyX->isColliding(*player)) {
+                keyX->interact(*player);
+                player->canLvlUp = true;
+                cout << "Door Opened.";
+                manager->deleteKey(keyX);
+                for (auto& eX : manager->getallChaEnemies())
+                    eX->setSpeed(eX->getSpeed() * 1.25f);
+            }
+            else if (!keyX->isObtained and player->state == 3) {
+                keyX->sprite.setPosition(1000, 200);
+                keyX->draw(window);
+            }
+
+        }
+        for (auto& doors : manager->getallDoors()) {
+            if (doors->isColliding(*player)) {
+                if (player->canLvlUp and Keyboard::isKeyPressed(Keyboard::E) and !doors->isOpened) {
+                    doors->doorSprite.setTexture(doors->doorTextureOpened);
+                    player->canLvlUp = false;
+                    doors->isOpened = true;
+
+                }
+                if (doors->isOpened) {
+                    XXX = player->getPos().x;
+                    YYY = player->getPos().y;
+                    level1();
+                }
+            }
+        }
         window.display();
     }
     delete pe1;
+    delete pe2;
+    delete pe3;
+    delete pe4;
+    delete pe5;
+    delete pe6;
+    delete potion1;
+    delete potion2;
+    delete potion3;
+    delete key1;
+    delete key2;
     delete player;
     delete manager;
 }
+

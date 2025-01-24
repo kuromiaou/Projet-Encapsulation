@@ -8,7 +8,7 @@ Wall::Wall(Vector2i _POS) {
 void Wall::update(float) {};
 void Wall::draw(RenderWindow& window) { window.draw(wallSprite); }
 
-bool Wall::isColliding(Player other) {
+bool Wall::isColliding(Player& other) {
 	if (wallSprite.getGlobalBounds().intersects(other.rect.getGlobalBounds())) return true;
 	else return false;
 }

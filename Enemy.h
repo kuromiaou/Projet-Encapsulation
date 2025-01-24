@@ -16,6 +16,10 @@ public:
     void draw(RenderWindow& window) override;
     void setPos(Vector2i pos);
     void setSpeed(float speed);
+    void setSpeed(int i = 1);
+    void increaseSpeed(int i = 1);
+    void decreaseSpeed(int i = 1);
+    
     float getSpeed();
     Vector2i getPos();
     void setBehaviour(Vector2f);

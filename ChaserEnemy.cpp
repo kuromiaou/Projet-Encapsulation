@@ -21,7 +21,7 @@ ChaserEnemy::ChaserEnemy(Vector2i _POS, float _SPEED, Vector2f _BEHAVIOUR)
 //            newBehaviour.y = -1;
 //        cout << newBehaviour.x << endl;
 //        setBehaviour(newBehaviour);
-//}
+//}                                                // FIRST VERSION IS BAD
 void ChaserEnemy::chasePlayer(Player& player) {
     float playerX = player.getPos().x;
     float playerY = player.getPos().y;
@@ -38,7 +38,7 @@ void ChaserEnemy::chasePlayer(Player& player) {
         deltaY /= distance;
     }
 
-    float speed = 1.75f; 
+    float speed = 2.25f; 
 
     newBehaviour.x = deltaX * speed;
     newBehaviour.y = deltaY * speed;

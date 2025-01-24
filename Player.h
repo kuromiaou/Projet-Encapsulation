@@ -1,12 +1,22 @@
 #pragma once
 #include "Entity.h"
+
 class Player :
     public Entity
 {
 private:
     Vector2i pos;
     float speed;
+    
 public:
+    bool moveDATA = false;
+    enum facing {
+        _UP = 0,
+        _LEFT = 1,
+        _DOWN = 2,
+        _RIGHT = 3,
+    };
+    facing facing;
     int state = 0;
     bool canLvlUp = false;
     RectangleShape rect;
